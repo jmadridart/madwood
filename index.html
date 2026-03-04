@@ -1333,7 +1333,7 @@
         </div>
       </div>
     </div>
-    <form action="https://formspree.io/f/xykdrzpg" method="POST" style="display: flex; flex-direction: column; gap: 16px;">
+    <form id="contact-form" style="display: flex; flex-direction: column; gap: 16px;">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <label style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);">Name</label>
@@ -1367,6 +1367,10 @@
         <textarea name="message" rows="4" placeholder="Brief description of your project..." style="background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 14px 18px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; resize: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='rgba(200,242,48,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.07)'"></textarea>
       </div>
       <button type="submit" class="btn-primary" style="align-self: flex-start; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;">Send Message <span class="arrow">→</span></button>
+    <div id="form-success" style="display:none; padding: 32px; background: var(--accent-dim); border: 1px solid rgba(200,242,48,0.25); border-radius: 4px; text-align: center;">
+      <div style="font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); margin-bottom: 8px;">Message Sent!</div>
+      <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">Thanks for reaching out — we'll get back to you within 24 hours.</p>
+    </div>
     </form>
   </div>
 </section>
@@ -1419,6 +1423,43 @@
   }, { threshold: 0.12 });
 
   reveals.forEach(el => observer.observe(el));
+
+  // Hide cursor on touch devices
+  if ('ontouchstart' in window) {
+    document.getElementById('cursor').style.display = 'none';
+    document.getElementById('cursorRing').style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+
+  // AJAX form submission
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://formspree.io/f/xykdrzpg', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.textContent = 'Try Again';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Try Again';
+        btn.disabled = false;
+      }
+    });
+  }
 </script>
 </body>
 </html>
