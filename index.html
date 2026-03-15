@@ -110,10 +110,10 @@
 
   /* HERO */
   .hero {
-    height: 100vh;
-    max-height: 860px;
+    min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    padding: 0 48px 60px;
     position: relative;
     overflow: hidden;
   }
@@ -141,27 +141,9 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 140px 48px 60px 48px;
+    padding-top: 140px;
     position: relative;
     z-index: 2;
-  }
-  .hero-image-panel {
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-image-panel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .hero-image-panel::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, var(--black) 0%, transparent 15%),
-                linear-gradient(to top, var(--black) 0%, transparent 20%);
-    pointer-events: none;
   }
 
   .hero-eyebrow {
@@ -513,8 +495,8 @@
 
   /* Scroll reveal */
   .reveal {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .reveal.visible {
@@ -869,21 +851,14 @@
 
     /* HERO */
     .hero {
-      grid-template-columns: 1fr;
+      padding: 0 24px 48px;
       min-height: 100svh;
-      max-height: none;
-      height: auto;
     }
-    .hero-image-panel {
-      height: 50vh;
-      order: -1;
-    }
-    .hero-image-panel::after {
-      background: linear-gradient(to bottom, var(--black) 0%, transparent 20%),
-                  linear-gradient(to top, var(--black) 0%, transparent 20%);
+    .hero-image-float {
+      display: none;
     }
     .hero-content {
-      padding: 48px 24px 60px 24px;
+      padding-top: 120px;
     }
     .hero-headline {
       font-size: clamp(64px, 18vw, 100px);
@@ -1066,6 +1041,11 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
 
+  <!-- Hero floating image -->
+  <div class="hero-image-float">
+    <img src="images/hero.jpg" alt="Madwood Agency" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;">
+  </div>
+
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span>Web Design & Development Agency</span>
@@ -1084,14 +1064,11 @@
         <a href="#services" class="btn-ghost">Our Services</a>
       </div>
     </div>
-    <div class="hero-scroll" style="margin-top: 48px;">
-      <div class="scroll-line"></div>
-      <span class="scroll-label">Scroll</span>
-    </div>
   </div>
 
-  <div class="hero-image-panel">
-    <img src="images/hero.jpg" alt="Madwood Agency">
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
   </div>
 </section>
 
