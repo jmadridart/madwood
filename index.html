@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="cf-2fa-verify" content="false">
 <title>Madwood — Web Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +42,7 @@
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.15s ease;
+    mix-blend-mode: difference;
   }
   .cursor-ring {
     width: 36px; height: 36px;
@@ -495,8 +495,8 @@
 
   /* Scroll reveal */
   .reveal {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .reveal.visible {
@@ -1325,7 +1325,7 @@
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; background: rgba(200,242,48,0.04); flex-shrink: 0;">✉</div>
-          <span style="font-size: 14px; color: var(--muted);">hello&#64;madwood.studio</span>
+          <span style="font-size: 14px; color: var(--muted);">hello@madwood.studio</span>
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; background: rgba(200,242,48,0.04); flex-shrink: 0;">☎</div>
@@ -1450,4 +1450,16 @@
         if (res.ok) {
           form.style.display = 'none';
           success.style.display = 'block';
-     
+        } else {
+          btn.textContent = 'Try Again';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Try Again';
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
+</body>
+</html>
