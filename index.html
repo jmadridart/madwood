@@ -112,8 +112,7 @@
   .hero {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 1fr auto;
-    padding: 0 48px 60px;
+    grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
   }
@@ -141,9 +140,27 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-top: 140px;
+    padding: 140px 48px 60px 48px;
     position: relative;
     z-index: 2;
+  }
+  .hero-image-panel {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-image-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 15%),
+                linear-gradient(to top, var(--black) 0%, transparent 20%);
+    pointer-events: none;
   }
 
   .hero-eyebrow {
@@ -507,71 +524,7 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
-  /* HERO IMAGE FLOAT */
-  .hero-image-float {
-    position: absolute;
-    right: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: clamp(280px, 30vw, 480px);
-    aspect-ratio: 4/5;
-    z-index: 1;
-    opacity: 0;
-    animation: fadeUp 1s 0.6s forwards;
-  }
-  .hero-img-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-img-placeholder::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      linear-gradient(135deg, rgba(200,242,48,0.04) 0%, transparent 50%),
-      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.015) 20px, rgba(255,255,255,0.015) 21px);
-  }
-  .placeholder-icon {
-    width: 48px; height: 48px;
-    border: 1px dashed rgba(200,242,48,0.3);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(200,242,48,0.4);
-    font-size: 20px;
-  }
-  .placeholder-label {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(245,242,236,0.2);
-  }
-  .placeholder-dims {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: rgba(245,242,236,0.12);
-  }
-  /* Corner marks */
-  .hero-img-placeholder::after {
-    content: '';
-    position: absolute;
-    top: 12px; left: 12px; right: 12px; bottom: 12px;
-    border-top: 1px solid rgba(200,242,48,0.12);
-    border-left: 1px solid rgba(200,242,48,0.12);
-    border-right: 1px solid rgba(200,242,48,0.12);
-    border-bottom: 1px solid rgba(200,242,48,0.12);
-    border-radius: 2px;
-    pointer-events: none;
-  }
+  /* HERO IMAGE FLOAT - replaced by panel */
 
   /* ALSO OFFER */
   .also-offer {
@@ -851,14 +804,14 @@
 
     /* HERO */
     .hero {
-      padding: 0 24px 48px;
+      grid-template-columns: 1fr;
       min-height: 100svh;
     }
-    .hero-image-float {
+    .hero-image-panel {
       display: none;
     }
     .hero-content {
-      padding-top: 120px;
+      padding: 120px 24px 60px 24px;
     }
     .hero-headline {
       font-size: clamp(64px, 18vw, 100px);
@@ -1041,11 +994,7 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
 
-  <!-- Hero floating image -->
-  <div class="hero-image-float">
-    <img src="images/hero.jpg" alt="Madwood Agency" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;">
-  </div>
-
+  <!-- LEFT: Text content -->
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span>Web Design & Development Agency</span>
@@ -1064,12 +1013,17 @@
         <a href="#services" class="btn-ghost">Our Services</a>
       </div>
     </div>
+    <div class="hero-scroll" style="margin-top: 48px;">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-label">Scroll</span>
+  <!-- RIGHT: Full height image -->
+  <div class="hero-image-panel">
+    <img src="images/hero.jpg" alt="Madwood Agency">
   </div>
+
 </section>
 
 <!-- MARQUEE -->
@@ -1325,7 +1279,7 @@
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; background: rgba(200,242,48,0.04); flex-shrink: 0;">✉</div>
-          <span style="font-size: 14px; color: var(--muted);">hello@madwood.studio</span>
+          <span style="font-size: 14px; color: var(--muted);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dad7dededdf2dfd3d6c5ddddd69cc1c6c7d6dbdd">[email&#160;protected]</a></span>
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; background: rgba(200,242,48,0.04); flex-shrink: 0;">☎</div>
@@ -1386,7 +1340,7 @@
   <p class="footer-copy">© 2025 Madwood Agency</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -1450,16 +1404,4 @@
         if (res.ok) {
           form.style.display = 'none';
           success.style.display = 'block';
-        } else {
-          btn.textContent = 'Try Again';
-          btn.disabled = false;
-        }
-      } catch(err) {
-        btn.textContent = 'Try Again';
-        btn.disabled = false;
-      }
-    });
-  }
-</script>
-</body>
-</html>
+     
