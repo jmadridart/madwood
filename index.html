@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp">
 <title>Madwood — Web Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,7 +111,8 @@
 
   /* HERO */
   .hero {
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 800px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
@@ -808,10 +810,15 @@
       min-height: 100svh;
     }
     .hero-image-panel {
-      display: none;
+      height: 50vh;
+      order: -1;
+    }
+    .hero-image-panel::after {
+      background: linear-gradient(to bottom, var(--black) 0%, transparent 20%),
+                  linear-gradient(to top, var(--black) 0%, transparent 20%);
     }
     .hero-content {
-      padding: 120px 24px 60px 24px;
+      padding: 48px 24px 60px 24px;
     }
     .hero-headline {
       font-size: clamp(64px, 18vw, 100px);
